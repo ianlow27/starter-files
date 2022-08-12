@@ -1,0 +1,22 @@
+{
+    "name": "ianl28/starter-files",
+    "description": "PHP class library to run as script from Composer in order to create the starter files for a PHP project.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ianl28\\StarterFiles\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ian Low",
+            "email": "ianlow28@gmail.com"
+        }
+    ],
+    "scripts": {
+       "post-status-cmd": "Ianl28\\StarterFiles\\StarterFiles::run" 
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
