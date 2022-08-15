@@ -2,6 +2,11 @@
 /* ====================================================
 TO DO:
 ======
+- cystrawennu y rhestr cwblhawyd i alldynnu yr ochr chwith ar gyfer y  changelog___add summarized of change description using the triple underscore
+- angen i greu plygell executables, e.e. os fath o wefanapp neu weithredolyn, gyda sgripiau cregyn/plisgyn___create executables folder
+- Yn y seirch prawfholiad, angen i newid Prawf1 i'r enw o'r dosbarth___debug test harness
+- Yn y README.md, angen i fewnosod hyffordiannau i ychwanegu y llinell ar gyfer sgriptiau, sef "Ianl28\\StarterFiles\\StarterFilers::run" - hefyd mae'n angen cynhwys hyffordiannau ar gyfer y prawfholiadseirch a'r gweithredolyn hefyd.___add extra instructions in the README.md
+- amnewid enw i script-starter-files___change name to script-starter-files
 -----------------------------------------------------
 DONE:
 =====

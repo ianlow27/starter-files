@@ -17,6 +17,6 @@
     "scripts": {
        "post-status-cmd": "Ianl28\\StarterFiles\\StarterFiles::run" 
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "alpha",
     "require": {}
 }
