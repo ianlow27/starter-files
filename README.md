@@ -24,6 +24,20 @@ or run the following command:
 
 ## Usage Example
 
+This utility is designed to be run as a script from within Composer, as follows:
+
+   composer.phar run-script post-status-cmd
+
+In order to do so, the following setting must be included in composer.json
+
+```php
+    "scripts": {
+      "post-status-cmd": "Ianl28\\StarterFiles\\StarterFiles::run"
+    }
+```
+
+A sanity check utility to call the class programmatically can be coded in PHP as follows:
+
 ```php
 
 $obj1 = new Ianl28\StarterFiles\StarterFiles();
