@@ -134,8 +134,8 @@ class '. $lnamespace . '{
     echo "This is called from '. $lnamespace. '->__construct()\n";
   }//endfunc
   //-------------------------------
-  public function testrun(){
-    echo "This is called from '. $lnamespace. '->testrun()\n";
+  public function main(){
+    echo "This is called from '. $lnamespace. '->main()\n";
   }//endfunc
   //-------------------------------
 
@@ -157,7 +157,7 @@ require_once("../vendor/autoload.php");
 
 $oprawf1 = new '. $lvendor .'\\'. $lnamespace .'\\'.  $lnamespace.'();
 
-$oprawf1->testrun();
+$oprawf1->main();
 
 ?>
 ');
@@ -181,7 +181,7 @@ require_once("./vendor/autoload.php");
 
 $oprawf1 = new '. $lvendor .'\\'. $lnamespace .'\\'.  $lnamespace.'();
 
-$oprawf1->testrun();
+$oprawf1->main();
 
 ?>
 ');
@@ -220,7 +220,7 @@ or run the following command:
 
 $obj1 = new '.$lvendor.'\\'.$lnamespace.'\\'.$lnamespace.'();
 
-$obj1->testrun();
+$obj1->main();
 
 ```
 
