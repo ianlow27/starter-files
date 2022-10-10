@@ -34,22 +34,40 @@ class StarterFiles{
     echo "Today is ". date("Ymd Hi:s"). "\n";
     $afile1=json_decode(file_get_contents("./composer.json"));
     $bbreak=0; $lnamespace=""; $lvendor=""; $lpackagename=""; $lauthor=""; $lemail="";
+//-------------------------------------
+$llTflnCyf= preg_replace("/ /", "",
+              ucwords(
+                preg_replace("/\-/", " ",
+                  basename(getcwd())
+                )
+              )
+            );
+
+//echo $llTflnCyf."\n";
+if(!file_exists("./src")) mkdir("./src", 0755);
+
+
+
+
+
+//-------------------------------------
+
     foreach($afile1 as $key => $value){
-      echo $key." -> ";
-      if(($key != "autoload") && ($key != "name") && ($key != "authors") ) continue;
+      //echo $key." -> ";
+      if(($key != "name") && ($key != "name") && ($key != "authors") ) continue;
       if(gettype($value) != "string") 
       foreach($value as $key1=>$value1){
-        echo $key1." -> ";
+        //echo $key1." -> ";
         if( ($key1 != "psr-4") && ($key1 != 0 ) ) continue;
         if(gettype($value1) != "string") 
         foreach($value1 as $key2=>$value2){
-          echo $key2." -> ";
+          //echo $key2." -> ";
           if(gettype($value2) != "string")
           foreach($value2 as $key3=>$value3){
             //echo $key3."->";
           }//endforeach
           else {
-            echo "[".$value2. "]";
+            //echo "[".$value2. "]";
             if($value2 == "src/"){
               //$bbreak=1;
               $lnamespace=preg_replace("/^([^\\\]*)\\\([^\\\]+)\\\([^\\\]*)$/", "$2", $key2);
@@ -70,10 +88,23 @@ class StarterFiles{
       if($bbreak) break;
     }//endforeach
 
-    if($lnamespace == ""){
-       echo "Error: Unable to discover namespace of project. Please ensure that composer.json contains an entry for autoload->psr-4->Namespace set to 'src/'.";
+    if($lpackagename == ""){
+       echo "Error: Unable to discover packagename of project. Please ensure that composer.json contains an entry for name in the format '<vendor>\<package-name>'.";
        die(); 
     }else {
+       $d1a = explode("/", $lpackagename);
+       $lvendor= preg_replace("/ /", "",
+                    ucwords(
+                      preg_replace("/\-/", " ", $d1a[0] )
+                    )
+                  );
+       $lnamespace = preg_replace("/ /", "",
+                    ucwords(
+                      preg_replace("/\-/", " ", $d1a[1] )
+                    )
+                  );
+
+       
        echo "Note: Discovered namespace '". $lvendor.'\\'. $lnamespace. "' with package name '". $lpackagename. "'\n";
 
        if(!file_exists("./src/". $lnamespace.".php")){
@@ -111,24 +142,41 @@ class '. $lnamespace . '{
 }//endclass 
 ?>
 ');
+echo "created ./src/". $lnamespace. ".php!\n";
        }//endif
        //-----------------------------------------
        if(!file_exists("./examples")){
-         mkdir("./examples");
+         //mkdir("./examples");
        }
        //-----------------------------------------
        if(!file_exists("./examples/testharness.php")){
-         file_put_contents("./examples/testharness.php",
+         file_put_contents("./src/test.php",
 '<?php
 
 require_once("../vendor/autoload.php");
 
-$oprawf1 = new Ian\Prawf1\Prawf1();
+$oprawf1 = new '. $lvendor .'\\'. $lnamespace .'\\'.  $lnamespace.'();
 
 $oprawf1->testrun();
 
 ?>
 ');
+echo "created ./src/test.php!\n";
+       }//endif
+       //-----------------------------------------
+       if(!file_exists("./index.php")){
+         file_put_contents("./index.php",
+'<?php
+
+require_once("./vendor/autoload.php");
+
+$oprawf1 = new '. $lvendor .'\\'. $lnamespace .'\\'.  $lnamespace.'();
+
+$oprawf1->testrun();
+
+?>
+');
+echo "created ./src/test.php!\n";
        }//endif
        //-----------------------------------------
        if(!file_exists("./README.md")){
@@ -183,6 +231,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 ');
+echo "created ./README.md!\n";
        }//endif 
        //-----------------------------------------
        if(!file_exists("./LICENSE.md")){
@@ -209,6 +258,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ');
+echo "created ./LICENSE.md!\n";
        }//endif 
        //-----------------------------------------
        if(!file_exists("./CONTRIBUTING.md")){
@@ -237,6 +287,7 @@ will be closed (this is selected by default).
 - All new classes must carry the standard copyright notice docblock
 - All code in the `src` folder must follow the PSR-2 standard
 ');
+echo "created ./CONTRIBUTING.md!\n";
        }//endif 
        //-----------------------------------------
        if(!file_exists("./src/". $lnamespace. ".php")){
@@ -257,9 +308,22 @@ will be closed (this is selected by default).
           }//endforeach 
        }
        file_put_contents("./CHANGELOG.md", $lchangelogstr);
+echo "created ./CHANGELOG.md!\n";
        //-----------------------------------------
     }//endif
+    echo "Files created!\n";
+    echo 'Please ensure that the following autoload entry is added to composer.json, and then run "composer update":
+    "autoload": {
+      "psr-4": {
+         "'. $lvendor. '\\\\'. $lnamespace. '\\\\": "src/"
+      }
+    },
+
+';
   }//endfunc
   //------------------------
+
+
+
 }//endclass
 ?>

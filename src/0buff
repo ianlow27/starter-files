@@ -1,0 +1,15 @@
+       //-----------------------------------------
+       if(!file_exists("./examples/testharness.php")){
+         file_put_contents("./src/test.php",
+'<?php
+
+require_once("../vendor/autoload.php");
+
+$oprawf1 = new '. $lvendor .'\\'. $lnamespace .'\\'.  $lnamespace.'();
+
+$oprawf1->testrun();
+
+?>
+');
+echo "created ./src/test.php!\n";
+       }//endif
