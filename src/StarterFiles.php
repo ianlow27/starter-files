@@ -164,6 +164,15 @@ $oprawf1->testrun();
 echo "created ./src/test.php!\n";
        }//endif
        //-----------------------------------------
+       if(!file_exists("./src/servephp.sh")){
+         file_put_contents("./src/servephp.sh",
+'#!/bin/sh
+php -S localhost:3000 -t ../
+');
+chmod("./src/servephp.sh", 0755);;
+echo "created ./src/servephp.sh!\n";
+       }//endif
+       //-----------------------------------------
        if(!file_exists("./index.php")){
          file_put_contents("./index.php",
 '<?php
@@ -176,7 +185,7 @@ $oprawf1->testrun();
 
 ?>
 ');
-echo "created ./src/test.php!\n";
+echo "created ./index.php!\n";
        }//endif
        //-----------------------------------------
        if(!file_exists("./README.md")){

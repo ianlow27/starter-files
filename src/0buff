@@ -1,5 +1,3 @@
-       //-----------------------------------------
-       if(!file_exists("./examples/testharness.php")){
          file_put_contents("./src/test.php",
 '<?php
 
@@ -11,5 +9,3 @@ $oprawf1->testrun();
 
 ?>
 ');
-echo "created ./src/test.php!\n";
-       }//endif
