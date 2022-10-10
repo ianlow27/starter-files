@@ -33,6 +33,7 @@ class StarterFiles{
   public static function run(Event $event){
     echo "Today is ". date("Ymd Hi:s"). "\n";
     $afile1=json_decode(file_get_contents("./composer.json"));
+    $ldesc="";
     $bbreak=0; $lnamespace=""; $lvendor=""; $lpackagename=""; $lauthor=""; $lemail="";
 //-------------------------------------
 $llTflnCyf= preg_replace("/ /", "",
@@ -54,7 +55,7 @@ if(!file_exists("./src")) mkdir("./src", 0755);
 
     foreach($afile1 as $key => $value){
       //echo $key." -> ";
-      if(($key != "name") && ($key != "name") && ($key != "authors") ) continue;
+      if(($key != "description") && ($key != "name") && ($key != "authors") ) continue;
       if(gettype($value) != "string") 
       foreach($value as $key1=>$value1){
         //echo $key1." -> ";
@@ -63,26 +64,30 @@ if(!file_exists("./src")) mkdir("./src", 0755);
         foreach($value1 as $key2=>$value2){
           //echo $key2." -> ";
           if(gettype($value2) != "string")
-          foreach($value2 as $key3=>$value3){
-            //echo $key3."->";
-          }//endforeach
+            foreach($value2 as $key3=>$value3){
+              //echo $key3."->";
+            }//endforeach
           else {
             //echo "[".$value2. "]";
             if($value2 == "src/"){
               //$bbreak=1;
               $lnamespace=preg_replace("/^([^\\\]*)\\\([^\\\]+)\\\([^\\\]*)$/", "$2", $key2);
               $lvendor=preg_replace("/^([^\\\]*)\\\([^\\\]+)\\\([^\\\]*)$/", "$1", $key2);
-            }
+            }//endif
             if($key2 == "name"){  $lauthor = $value2; $xbbreak=1; }
             if($key2 == "email"){ $lemail = $value2;  $xbbreak=1; }
-          }
+          }//endif $value2
         }//endforeach
         //else echo "[".$value1. "]";
         if($bbreak) break;
       }//endforeach
       else {
-        $lpackagename = $value; 
-      } 
+        if      ($key == "description"){
+          $ldesc = $value; 
+        }else if($key == "name"){
+          $lpackagename = $value; 
+        }
+      } //endif $value1
       //else echo "[".$value. "]";
       //echo "\n";
       if($bbreak) break;
@@ -106,6 +111,7 @@ if(!file_exists("./src")) mkdir("./src", 0755);
 
        
        echo "Note: Discovered namespace '". $lvendor.'\\'. $lnamespace. "' with package name '". $lpackagename. "'\n";
+       echo "Description: ".$ldesc."\n";
 
        if(!file_exists("./src/". $lnamespace.".php")){
          file_put_contents("./src/". $lnamespace. ".php", 
@@ -249,7 +255,7 @@ echo "created ./index.php!\n";
 'README
 ======
 
-{- Please enter a short description of your project here. -}
+'. $ldesc. '
 
 ## Compatibility
 
