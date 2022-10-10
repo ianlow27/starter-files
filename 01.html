@@ -1,0 +1,57 @@
+<h1>README</h1>
+
+<p>This is a simple utility run after the Composer init command, that creates the essential starter files for a project, namely, the ./src/Class.php, ./README.md, ./LICENSE.md (MIT), ./CONTRIBUTING.md, ./CHANGELOG.md, ./.gitignore, ./src/test.php and ./src/servephp.sh.</p>
+
+<h2>Compatibility</h2>
+
+<p>Tested up to PHP 7, should be compatible with PHP 5.3 or above</p>
+
+<h2>Installation</h2>
+
+<p>The following instructions are used to create a new PHP project from scratch using ianl28/starter-files:</p>
+
+<ol>
+<li>Create a new folder for the new project by entering <strong>mkdir newproj</strong></li>
+<li>Navigate into the new folder <strong>cd newproj</strong></li>
+<li>Create a new composer.json file by entering <strong>composer init</strong></li>
+<li>Enter the necessary values. Ensure that the minimum stability is set to <strong>dev</strong>.</li>
+<li>Ensure that the internet is connected</li>
+<li>Run <strong>composer require ianl28/starter-files</strong></li>
+<li>Then add these lines to your composer.json:
+<code>json
+"scripts": {
+  "post-status-cmd": "Ianl28\\StarterFiles\\StarterFiles::run"
+},
+</code></li>
+<li>Then run <strong>composer status</strong></li>
+<li>The following files should then be created: ./index.php, ./README.md, ./LICENSE.md, ./CONTRIBUTING.md, ./.gitignore, ./src/Newproj.php, ./src/test.sh, ./src/servephp.sh</li>
+<li>Then add these lines to your composer.json:
+<code>json
+"autoload": {
+    "psr-4": {
+        "Namespace\\Newproj\\": "src/"
+    }
+},
+</code></li>
+<li>Then run <strong>composer update</strong></li>
+<li>To start the PHP server and serve ./index.php on the browser, <strong>cd ./src</strong>, and then enter <strong>servephp.sh</strong>, and then point the browser to <strong>localhost:3000</strong></li>
+<li>Alternatively, the class Newproj may be run from ./ as <strong>php index.php</strong> or from ./src as <strong>php test.php</strong></li>
+</ol>
+
+<h2>Change Log</h2>
+
+<p>Please see <a href="CHANGELOG.md">CHANGELOG</a> for more information on the recent changes.</p>
+
+<h2>Contribute</h2>
+
+<p>Please see <a href="CONTRIBUTING.md">CONTRIBUTING</a> for details.</p>
+
+<h2>Credits</h2>
+
+<ul>
+<li>Ian Low (ianlow28@gmail.com)</li>
+</ul>
+
+<h2>License</h2>
+
+<p>The MIT License (MIT). Please see <a href="LICENSE.md">License File</a> for more information.</p>

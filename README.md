@@ -1,7 +1,7 @@
 README
 ======
 
-This is a simple utility run after the Composer init command, that creates the essential starter files for a project, namely, the Class.php, README.md, LICENSE.md, CONTRIBUTING.md and CHANGELOG.md.
+This is a simple utility run after the Composer init command, that creates the essential starter files for a project, namely, the ./src/Class.php, ./README.md, ./LICENSE.md (MIT), ./CONTRIBUTING.md, ./CHANGELOG.md, ./.gitignore, ./src/test.php and ./src/servephp.sh.
 
 ## Compatibility
 
@@ -9,42 +9,33 @@ Tested up to PHP 7, should be compatible with PHP 5.3 or above
 
 ## Installation
 
-### Composer
-Add these lines to your composer.json:
+The following instructions are used to create a new PHP project from scratch using ianl28/starter-files:
+
+1. Create a new folder for the new project by entering **mkdir newproj**
+1. Navigate into the new folder **cd newproj**
+1. Create a new composer.json file by entering **composer init**
+1. Enter the necessary values. Ensure that the minimum stability is set to **dev**.
+1. Ensure that the internet is connected
+1. Run **composer require ianl28/starter-files**
+1. Then add these lines to your composer.json:
 ```json
-    {
-        "require": {
-            "ianl28/starter-files": "*"
-        }
-    }
-```
-or run the following command:
-
-    php composer.phar require ianl28/starter-files
-
-## Usage Example
-
-This utility is designed to be run as a script from within Composer, as follows:
-
-   composer.phar run-script post-status-cmd
-
-In order to do so, the following setting must be included in composer.json
-
-```php
     "scripts": {
       "post-status-cmd": "Ianl28\\StarterFiles\\StarterFiles::run"
-    }
+    },
 ```
-
-A sanity check utility to call the class programmatically can be coded in PHP as follows:
-
-```php
-
-$obj1 = new Ianl28\StarterFiles\StarterFiles();
-
-$obj1->testrun();
-
+1. Then run **composer status**
+1. The following files should then be created: ./index.php, ./README.md, ./LICENSE.md, ./CONTRIBUTING.md, ./.gitignore, ./src/Newproj.php, ./src/test.sh, ./src/servephp.sh
+1. Then add these lines to your composer.json:
+```json
+    "autoload": {
+        "psr-4": {
+            "Namespace\\Newproj\\": "src/"
+        }
+    },
 ```
+1. Then run **composer update**
+1. To start the PHP server and serve ./index.php on the browser, **cd ./src**, and then enter **servephp.sh**, and then point the browser to **localhost:3000**
+1. Alternatively, the class Newproj may be run from ./ as **php index.php** or from ./src as **php test.php**
 
 ## Change Log
 

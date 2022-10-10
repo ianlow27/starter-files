@@ -1,0 +1,7 @@
+1. Then add these lines to your composer.json:
+```json
+    "scripts": {
+      "post-status-cmd": "Ianl28\\StarterFiles\\StarterFiles::run"
+    },
+```
+1. Then run **composer status**
