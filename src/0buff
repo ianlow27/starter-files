@@ -1,0 +1,23 @@
+echo "<li>1";
+  $afile1=json_decode(file_get_contents("./composer.json"));
+echo "<li>2";
+  $ldesc=""; $bbreak=0; $lnamespace=""; $lvendor=""; $lpackagename=""; $lauthor=""; $lemail="";
+echo "<li>3";
+  //-------------------------------------
+  $llTflnCyf= preg_replace("/ /", "",
+              ucwords(
+                preg_replace("/\-/", " ",
+                  basename(getcwd())
+                )
+              )
+            );
+
+  echo $llTflnCyf."\n";
+  if(!file_exists("./src")) mkdir("./src", 0755);
+  //-------------------------------------
+  foreach($afile1 as $key => $value){
+    //echo $key." -> ";
+    if(($key != "description") && ($key != "name") && ($key != "authors") ) continue;
+    if(gettype($value) != "string")  continue;
+  }//endforeach
+

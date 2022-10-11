@@ -29,8 +29,88 @@ use Composer\Script\Event;
 use Composer\Installer\PackageEvent;
 
 class StarterFiles{
+private $prjname;
 
-  public static function run(Event $event){
+
+public function __construct(){
+echo "<li>1";
+  $afile1=json_decode(file_get_contents("./composer.json"));
+echo "<li>2";
+  $ldesc=""; $bbreak=0; $lnamespace=""; $lvendor=""; $lpackagename=""; $lauthor=""; $lemail="";
+echo "<li>3";
+  //-------------------------------------
+  $llTflnCyf= preg_replace("/ /", "",
+              ucwords(
+                preg_replace("/\-/", " ",
+                  basename(getcwd())
+                )
+              )
+            );
+
+  echo $llTflnCyf."\n";
+  $this->prjname = $llTflnCyf;
+  if(!file_exists("./src")) mkdir("./src", 0755);
+  //-------------------------------------
+  foreach($afile1 as $key => $value){
+    //echo $key." -> ";
+    if(($key != "description") && ($key != "name") && ($key != "authors") ) continue;
+    if(gettype($value) != "string")  continue;
+  }//endforeach
+
+}//endfunc
+//---------------------------------------------------------
+//---------------------------------------------------------
+//---------------------------------------------------------
+//---------------------------------------------------------
+public function JSUtils(){
+//----------------------
+  return '
+<script>
+//----------------------------------------------
+function isempty(pstr){
+  if( (pstr == null) || (pstr == "") ){
+    return true;
+  }else {
+    return false;
+  }
+}//endfunc
+//----------------------------------------------
+function test1(pstr){
+  return "_1_2_3_" + pstr;
+}//endfunc
+//----------------------------------------------
+function locstor(pkey, pval){
+pkey = "'.$this->prjname.'_" + pkey;
+if(pval == null){
+  let lval1=localStorage.getItem(pkey);
+  if(isempty(lval1)){
+    lval1 = "";
+    //alert("1____" + lval1);
+  }else {
+    //alert("2____" + lval1);
+  }
+  return lval1;
+}else {
+  localStorage.setItem(pkey, pval);
+}
+  
+}//endfunc
+//----------------------------------------------
+function gebid(pstr){
+  return document.getElementById(pstr);
+}//endfunc
+//----------------------------------------------
+//----------------------------------------------
+</script>
+';
+//---------------------------------------------------------
+//---------------------------------------------------------
+}//endfunc
+//---------------------------------------------------------
+//---------------------------------------------------------
+//---------------------------------------------------------
+//---------------------------------------------------------
+public static function run(Event $event){
     echo "Today is ". date("Ymd Hi:s"). "\n";
     $afile1=json_decode(file_get_contents("./composer.json"));
     $ldesc="";
@@ -46,13 +126,7 @@ $llTflnCyf= preg_replace("/ /", "",
 
 //echo $llTflnCyf."\n";
 if(!file_exists("./src")) mkdir("./src", 0755);
-
-
-
-
-
-//-------------------------------------
-
+    //-------------------------------------
     foreach($afile1 as $key => $value){
       //echo $key." -> ";
       if(($key != "description") && ($key != "name") && ($key != "authors") ) continue;
@@ -156,7 +230,7 @@ __a {text-decoration:none;}
 <tr><td style="background-color:darkslategrey;color:white;xxtext-align:right;">
 <table width="100%">
 <tr>
-<td width="99%" style="text-align:center;" >
+<td width="99%" style="text-align:center;color:white;" >
   php-slideshow
 </td>
 <td width="1%" >
@@ -224,6 +298,11 @@ echo "created ./src/test.php!\n";
        if(!file_exists("./.gitignore")){
          file_put_contents("./.gitignore", 'vendor');
 echo "created ./.gitignore!\n";
+       }//endif
+       //-----------------------------------------
+       if(!file_exists("./favicon.ico")){
+         file_put_contents("./favicon.ico", '');
+echo "created ./favicon.ico!\n";
        }//endif
        //-----------------------------------------
        if(!file_exists("./src/servephp.sh")){
